@@ -1,0 +1,7 @@
+# Python virtual environment
+.venv/
+
+# Data files
+data/
+indicators/
+today_bullish_scores/
