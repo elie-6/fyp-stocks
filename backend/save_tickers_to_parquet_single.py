@@ -21,7 +21,7 @@ import yfinance as yf
 
 # ---------- Config ----------
 PARQUET_ROOT = os.environ.get("PARQUET_ROOT", "data/parquet")
-TICKERS = ["TSLA", "AAPL", "MSFT"]   # change as needed
+TICKERS = ['AAPL', 'AMZN', 'GOOG', 'MSFT', 'TSLA']   # change as needed
 INTERVAL = "1d"                      # '1d', '1h', '1m'
 AUTO_ADJUST = True                   # yfinance auto_adjust
 PYARROW_ENGINE = "pyarrow"

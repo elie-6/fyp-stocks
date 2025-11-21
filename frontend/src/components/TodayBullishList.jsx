@@ -1,7 +1,18 @@
 import { useEffect, useState } from 'react';
 import { fetchTodayBullish } from '../api/api';
 
-export default function TodayBullishList() {
+/*
+  This component fetches today's bullish data from the backend.
+  It can be used in two ways:
+
+  1️⃣ As a data provider for render-prop (Dashboard):
+     <TodayBullishList>
+       {({ data, loading, error }) => (
+         // render whatever you want with the data
+       )}
+     </TodayBullishList>
+*/
+export default function TodayBullishList({ children }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -9,31 +20,16 @@ export default function TodayBullishList() {
   useEffect(() => {
     fetchTodayBullish()
       .then((res) => {
-        setData(res);
+        setData(Array.isArray(res) ? res : []);
         setLoading(false);
       })
       .catch((err) => {
         console.error(err);
-        setError(err.message);
+        setError(err.message || String(err));
         setLoading(false);
       });
   }, []);
 
-  if (loading) return <p>Loading bullish scores...</p>;
-  if (error) return <p>Error: {error}</p>;
-  if (!Array.isArray(data) || data.length === 0) return <p>No data available</p>;
-
-  return (
-    <div>
-      <h2>Today's Bullish Ranking</h2>
-      <ul>
-        {data.map((row) => (
-          <li key={row.ticker}>
-            {row.ticker}: {row.bullish_score?.toFixed(2) ?? 'N/A'}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  // If a render-prop function is provided
+  return typeof children === 'function' ? children({ data, loading, error }) : null;
 }
-

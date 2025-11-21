@@ -116,8 +116,15 @@ def compute_all_tickers():
             # Filter only **new raw rows**
             df_new = df_raw[df_raw['timestamp'] > last_ts]
             if not df_new.empty:
-                df_new_ind = calculate_indicators_and_score(df_new)
-                df_combined = pd.concat([df_indicators, df_new_ind], ignore_index=True)
+             LOOKBACK = max(50, 20, 14, 10)  # max rows needed for rolling indicators
+             df_prev = df_raw[df_raw['timestamp'] <= last_ts].tail(LOOKBACK)
+             df_to_compute = pd.concat([df_prev, df_new], ignore_index=True)
+             df_combined_new = calculate_indicators_and_score(df_to_compute)
+
+             df_combined_new = df_combined_new.iloc[-len(df_new):]
+
+             df_combined = pd.concat([df_indicators, df_combined_new], ignore_index=True)
+                    
             else:
                 df_combined = df_indicators.copy()
         else:
