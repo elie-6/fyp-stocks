@@ -2,6 +2,7 @@ import './Dashboard.css';
 import Header from '../components/Header';
 import TickerCard from '../components/TickerCard';
 import TodayBullishList from '../components/TodayBullishList';
+import TickerHistoryList from '../components/TickerHistoryList';
 
 export default function Dashboard() {
   return (
@@ -31,9 +32,22 @@ export default function Dashboard() {
               {/* Top 5 bullish tickers */}
               <section className="top-tickers-grid">
                 {topTickers.map((t) => (
-                  <TickerCard key={t.ticker} ticker={t.ticker} score={t.bullish_score} />
+                  <TickerHistoryList key={t.ticker} ticker={t.ticker}>
+                    {({ data: history = [], loading: histLoading }) => {
+                      // get last 60 closes (safe even if history is shorter)
+                      const closes = Array.isArray(history) ? history.slice(-60).map(d => d.close) : [];
+                      return (
+                        <TickerCard
+                          ticker={t.ticker}
+                          score={t.bullish_score}
+                          trendData={!histLoading ? closes : []}
+                        />
+                      );
+                    }}
+                  </TickerHistoryList>
                 ))}
               </section>
+
 
               {/* Bottom split section */}
               <section className="bottom-section">

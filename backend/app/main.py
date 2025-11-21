@@ -1,5 +1,5 @@
 # backend/main.py
-from fastapi import FastAPI
+from fastapi import FastAPI,HTTPException
 import pandas as pd
 from fastapi.middleware.cors import CORSMiddleware
 import os
@@ -7,6 +7,7 @@ from app.routes import stocks  # your existing router
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
 TODAY_FILE = os.path.join(BASE_DIR, "today_bullish_scores", "parquet", "today_bullish_scores.parquet")
+TICKER_DATA_DIR = os.path.join(BASE_DIR, "data", "parquet")  # folder containing {ticker}.parquet
 
 
 app = FastAPI(title="Stock Search API")
@@ -42,3 +43,22 @@ def get_today_bullish():
         return df.to_dict(orient="records")
     except FileNotFoundError:
         return {"error": "Bullish score file not found"}
+    
+@app.get("/api/ticker_history/{ticker}")
+def get_ticker_history(ticker: str):
+    file_path = os.path.join(TICKER_DATA_DIR, f"{ticker}.parquet")
+    
+    # Debug prints
+    print("Looking for ticker file:", file_path)
+    print("Exists?", os.path.exists(file_path))
+    
+    if not os.path.exists(file_path):
+        raise HTTPException(status_code=404, detail="Ticker data not found")
+
+    try:
+        df = pd.read_parquet(file_path).sort_values("timestamp")
+        df['timestamp'] = df['timestamp'].astype(str)
+        # return full dataframe
+        return df.to_dict(orient="records")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
