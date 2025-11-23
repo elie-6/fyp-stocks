@@ -1,68 +1,116 @@
 .dashboard-container {
-    padding: 1.5rem 4rem 2rem 4rem; /* top padding smaller */
-    background-color: #121922;
-    min-height: 100vh;
-    color: #FFFFFF;
-    box-sizing: border-box;
-  }
-  
-  /* Section title spacing */
-  .section-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #FFFFFF;
-    margin: 1.5rem 0 1.5rem 0; /* slightly less top margin */
-  }
-  /* Top bullish cards grid */
-  .top-tickers-grid {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(5, 1fr); /* 5 cards */
-    margin-bottom: 3rem; /* space before bottom section */
-  }
-  
-  /* Bottom split section */
-  .bottom-section {
-    display: flex;
-    gap: 2rem; /* space between left & right */
-    align-items: flex-start;
-  }
-  
-  /* Best bullish ticker card */
-  .bottom-section > .card {
-    flex: 2; /* bigger card for the top bullish */
-  }
-  
-  /* All tickers list */
-  .all-tickers {
-    flex: 1; /* smaller column */
-    background-color: #1E2633;
-    padding: 1.5rem;
-    border-radius: 12px;
-    border: 1px solid #2C3E50;
-  }
-  
-  .all-tickers h2 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-  }
-  
-  .all-tickers ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .all-tickers li {
-    margin-bottom: 0.7rem;
-    color: #B0B8C1;
-    cursor: pointer;
-    transition: color 0.2s;
-  }
-  
-  .all-tickers li:hover {
-    color: #3B82F6; /* subtle blue on hover */
-  }
-  
+  padding: 1.5rem 4rem 2rem 4rem;
+  /* top padding smaller */
+  background-color: #121922;
+  min-height: 100vh;
+  color: #FFFFFF;
+  box-sizing: border-box;
+}
+
+/* Section title spacing */
+.section-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 1.5rem 0 1.5rem 0;
+  /* slightly less top margin */
+}
+
+/* Top bullish cards grid */
+.top-tickers-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(5, 1fr);
+  /* 5 cards */
+  margin-bottom: 3rem;
+  /* space before bottom section */
+}
+
+/* Bottom split section */
+.bottom-section {
+  display: flex;
+  gap: 2rem;
+  /* space between left & right */
+  align-items: stretch;
+}
+
+/* Best bullish ticker card */
+.bottom-section>.card {
+  flex: 3;
+  /* bigger card for the top bullish */
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Make top TickerCard take only needed space */
+.bottom-section>.card .ticker-card-wrapper {
+  flex: 0 0 auto;
+  /* only as tall as content */
+}
+
+/* Make chart take remaining space */
+.bottom-section>.card .indicator-chart-wrapper {
+  flex: 1 1 auto;
+}
+
+/* All tickers list */
+.all-tickers {
+  flex: 1;
+  /* smaller column */
+  background-color: #1E2633;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #2C3E50;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.all-tickers h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.ticker-columns {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ticker-columns ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ticker-columns li {
+  margin-bottom: 0.7rem;
+  color: #B0B8C1;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.ticker-columns li:hover {
+  color: #3B82F6;
+  /* subtle blue on hover */
+}
+
+.show-more-btn {
+  margin-top: 1rem;
+  background-color: #3B82F6;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.show-more-btn:hover {
+  background-color: #2563EB;
+}

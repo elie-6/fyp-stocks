@@ -12,3 +12,10 @@ export async function fetchTickerHistory(ticker) {
   if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
   return await res.json();
 }
+
+// New function for fetching full indicator parquet
+export async function fetchTickerIndicators(ticker) {
+  const res = await fetch(`${API_BASE}/ticker_indicators/${ticker}`);
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+  return await res.json();
+}

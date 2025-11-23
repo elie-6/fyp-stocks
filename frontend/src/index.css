@@ -78,3 +78,93 @@ header nav a {
 header nav a:hover {
   color: var(--link-hover);
 }
+
+/* alltickerspage.css */
+.all-tickers-page {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.all-tickers-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* Card layout: left (ticker) | middle (close+vol) | right (sparkline) */
+.full-width-ticker-card {
+  display: flex;
+  align-items: center;
+  background-color: #1E2633;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  border: 1px solid #2C3E50;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+/* Lift on hover */
+.full-width-ticker-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+/* LEFT: ticker name — larger and with extra bottom space */
+.ticker-card-left {
+  flex: 1 1 40%;
+  padding-right: 1rem;
+}
+.ticker-card-left h3 {
+  margin: 0;
+  font-size: 1.45rem;     /* bigger ticker name */
+  line-height: 1.4;       /* gives more vertical space under the name */
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+/* MIDDLE: close + volume (right aligned) */
+.ticker-card-middle {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;  /* right-align text before sparkline */
+  gap: 0.25rem;
+  min-width: 140px;       /* reserve space before sparkline */
+  margin-right: 1rem;
+}
+.ticker-card-middle .ticker-close,
+.ticker-card-middle .ticker-vol {
+  margin: 0;
+  color: #B0B8C1;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* RIGHT: sparkline */
+.ticker-card-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 200px; /* ensures sparkline has room on far right */
+}
+
+/* Small responsive tweak: stack middle+right on tiny screens */
+@media (max-width: 720px) {
+  .full-width-ticker-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .ticker-card-middle {
+    align-items: flex-start;
+    min-width: auto;
+    margin-right: 0;
+  }
+  .ticker-card-right {
+    min-width: auto;
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+

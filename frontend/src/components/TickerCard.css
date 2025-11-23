@@ -24,6 +24,20 @@
     margin: 0;
     color: #B0B8C1;
   }
+
+  .card.bottom-card {
+    padding: 1rem;
+  }
+  
+  .card.bottom-card h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.2rem;
+  }
+  
+  .card.bottom-card p {
+    font-size: 0.9rem;
+  }
+  
   
   /* Cursor pointer utility */
   .cursor-pointer {

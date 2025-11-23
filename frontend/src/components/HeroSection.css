@@ -1,0 +1,78 @@
+.hero-wrapper {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 1rem;
+    background: linear-gradient(145deg, #14171b, #0f1317);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.03);
+  }
+  
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .ticker-title {
+    margin: 0;
+    font-size: 1.4rem;
+    color: #fff;
+  }
+  
+  .hero-meta {
+    font-size: 0.95rem;
+    color: #b0b8c1;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+  
+  .price {
+    font-weight: 600;
+    color: #ffffff;
+  }
+  
+  .pct-change.pos {
+    color: #34d399; /* green */
+  }
+  
+  .pct-change.neg {
+    color: #fb7185; /* red */
+  }
+  
+  .hero-sub {
+    font-size: 0.85rem;
+    color: #9aa4ab;
+    margin-top: 4px;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .bullish-label {
+    opacity: 0.8;
+  }
+  
+  .bullish-value {
+    font-weight: 600;
+    color: #fff;
+  }
+  
+  .hero-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hero-sparkline {
+    width: 220px;
+    height: 50px;
+  }
+  

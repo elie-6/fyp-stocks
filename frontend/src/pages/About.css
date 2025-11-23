@@ -1,0 +1,72 @@
+/* About page styling */
+.about-page {
+  background-color: #121922;
+  color: #FFFFFF;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 4rem 2rem;
+  box-sizing: border-box;
+}
+
+.about-container {
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.about-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-align: center;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.about-intro {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #B0B8C1;
+  text-align: center;
+  line-height: 1.7;
+}
+
+.about-content {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #CED4DA;
+}
+
+.about-mystery {
+  font-style: italic;
+  color: #3B82F6; /* subtle highlight for intrigue */
+}
+
+.about-disclaimer {
+  font-size: 0.85rem;
+  color: #9CA3AF; /* muted gray */
+  margin-top: 2rem;
+  line-height: 1.5;
+}
+
+
+@media (max-width: 768px) {
+  .about-page {
+    padding: 3rem 1.5rem;
+  }
+
+  .about-title {
+    font-size: 2rem;
+  }
+
+  .about-intro {
+    font-size: 1.2rem;
+  }
+
+  .about-content {
+    font-size: 1rem;
+  }
+}

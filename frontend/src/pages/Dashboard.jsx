@@ -3,8 +3,13 @@ import Header from '../components/Header';
 import TickerCard from '../components/TickerCard';
 import TodayBullishList from '../components/TodayBullishList';
 import TickerHistoryList from '../components/TickerHistoryList';
+import { useNavigate } from 'react-router-dom';
+import IndicatorsChart from '../components/IndicatorsChart';
 
 export default function Dashboard() {
+
+  const navigate = useNavigate();
+
   return (
     <div className="dashboard-container">
       <Header />
@@ -51,19 +56,41 @@ export default function Dashboard() {
 
               {/* Bottom split section */}
               <section className="bottom-section">
-                {/* Left: best bullish ticker */}
                 {topTickers[0] && (
-                  <TickerCard ticker={topTickers[0].ticker} score={topTickers[0].bullish_score} />
+                  <div className="card">
+                    <TickerCard
+                     className="bottom-card"
+                      ticker={topTickers[0].ticker}
+                      score={topTickers[0].bullish_score}
+                    />
+                    {/* Indicators chart below the ticker card */}
+                    <div style={{ marginTop: '1.5rem' , height: '100px'}}>
+                      <IndicatorsChart ticker={topTickers[0].ticker} />
+                    </div>
+                  </div>
                 )}
 
                 {/* Right: all tickers alphabetical list */}
                 <div className="all-tickers">
                   <h2>All Tickers</h2>
-                  <ul>
-                    {allTickers.map((ticker) => (
-                      <li key={ticker}>{ticker}</li>
-                    ))}
-                  </ul>
+                  <div className="ticker-columns">
+                    <ul>
+                      {allTickers.slice(0, 5).map((ticker) => (
+                        <li key={ticker} onClick={() => navigate(`/ticker/${ticker}`)}>{ticker}</li>
+                      ))}
+                    </ul>
+                    <ul>
+                      {allTickers.slice(5, 10).map((ticker) => (
+                        <li key={ticker} onClick={() => navigate(`/ticker/${ticker}`)}>{ticker}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <button
+                    className="show-more-btn"
+                    onClick={() => navigate("/all-tickers", { state: { allTickers } })}
+                  >
+                    Show More
+                  </button>
                 </div>
               </section>
             </>
