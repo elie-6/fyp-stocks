@@ -7,6 +7,8 @@ import TickerHistoryList from '../components/TickerHistoryList';
 import TickerIndicatorsList from '../components/TickerIndicatorsList';
 import TradingViewWidget from '../components/TradingViewWidget'; // <-- import widget
 import { Sparklines, SparklinesLine } from 'react-sparklines';
+import IndicatorsChart from '../components/IndicatorsChart';
+import BullishScoreOverview from '../components/BullishScoreOverview'; // new
 
 export default function TickerPage() {
   const { ticker } = useParams();
@@ -69,35 +71,31 @@ export default function TickerPage() {
             }}
           </TickerIndicatorsList>
 
-          
-
           {/* Main Chart: TradingView Widget */}
           <section className="main-chart" style={{
-           
-            padding: '1rem 0 0 0', // top padding for header
+            padding: '1rem 0 0 0',
             background: 'linear-gradient(145deg,#0f1317,#0c0f12)',
             borderRadius: 12,
             border: '1px solid rgba(255,255,255,0.03)',
             width: '100%',
-            minHeight: '600px',  // dynamically fills most of screen height
+            minHeight: '600px',
             boxSizing: 'border-box',
             display: 'flex',
             flexDirection: 'column',
-
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
               <h3 style={{ margin: 0 }}>Price Chart</h3>
               <div style={{ fontSize: 14, color: '#b0b8c1' }}>TradingView Candlestick</div>
             </div>
 
-            <div style={{  flex: 1, width: '100%' }}> 
+            <div style={{ flex: 1, width: '100%' }}> 
               <TradingViewWidget symbol={ticker} />
             </div>
           </section>
 
-          {/* Recent Data Table */}
+          {/* Recent Data Table - last 15 rows */}
           <div style={{ padding: '1rem', background: 'linear-gradient(145deg,#0f1317,#0c0f12)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.03)' }}>
-            <h3 style={{ marginTop: 0 }}>Recent Data</h3>
+            <h3 style={{ marginTop: 0 }}>Recent Data (Last 15 rows)</h3>
 
             <TickerHistoryList ticker={ticker}>
               {({ data: history = [], loading: histLoading, error: histError }) => (
@@ -113,7 +111,7 @@ export default function TickerPage() {
                       indMap[String(r.timestamp ?? r.date ?? '')] = r;
                     });
 
-                    const rows = history.slice(-60).map((r) => {
+                    const rows = history.slice(-15).map((r) => {
                       const key = String(r.timestamp ?? r.date ?? '');
                       return {
                         date: r.date || (r.timestamp ? new Date(Number(r.timestamp)).toISOString().slice(0,10) : ''),
@@ -127,44 +125,57 @@ export default function TickerPage() {
                     });
 
                     return (
-                      <div style={{ overflowX: 'auto', marginTop: 8 }}>
-                        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                          <thead>
-                            <tr style={{ textAlign: 'left', color: '#B0B8C1', fontSize: 13 }}>
-                              <th style={{ padding: '8px 6px' }}>Date</th>
-                              <th style={{ padding: '8px 6px' }}>Open</th>
-                              <th style={{ padding: '8px 6px' }}>High</th>
-                              <th style={{ padding: '8px 6px' }}>Low</th>
-                              <th style={{ padding: '8px 6px' }}>Close</th>
-                              <th style={{ padding: '8px 6px' }}>Volume</th>
-                              <th style={{ padding: '8px 6px' }}>Bullish</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {rows.map((row, idx) => (
-                              <tr key={idx} style={{ borderTop: '1px solid rgba(255,255,255,0.03)' }}>
-                                <td style={{ padding: '8px 6px' }}>{row.date}</td>
-                                <td style={{ padding: '8px 6px' }}>{row.open}</td>
-                                <td style={{ padding: '8px 6px' }}>{row.high}</td>
-                                <td style={{ padding: '8px 6px' }}>{row.low}</td>
-                                <td style={{ padding: '8px 6px' }}>{row.close}</td>
-                                <td style={{ padding: '8px 6px' }}>{row.volume}</td>
-                                <td style={{ padding: '8px 6px' }}>
-                                  {row.indicators && typeof row.indicators.bullish_score === 'number'
-                                    ? (row.indicators.bullish_score * 100).toFixed(2)
-                                    : 'N/A'}
-                                </td>
+                      <>
+                        <div style={{ overflowX: 'auto', marginTop: 8 }}>
+                          <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 600 }}>
+                            <thead>
+                              <tr style={{ textAlign: 'left', color: '#B0B8C1', fontSize: 13 }}>
+                                <th style={{ padding: '8px 6px' }}>Date</th>
+                                <th style={{ padding: '8px 6px' }}>Open</th>
+                                <th style={{ padding: '8px 6px' }}>High</th>
+                                <th style={{ padding: '8px 6px' }}>Low</th>
+                                <th style={{ padding: '8px 6px' }}>Close</th>
+                                <th style={{ padding: '8px 6px' }}>Volume</th>
+                                <th style={{ padding: '8px 6px' }}>Bullish</th>
                               </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
+                            </thead>
+                            <tbody>
+                              {rows.map((row, idx) => (
+                                <tr key={idx} style={{ borderTop: '1px solid rgba(255,255,255,0.03)' }}>
+                                  <td style={{ padding: '8px 6px' }}>{row.date}</td>
+                                  <td style={{ padding: '8px 6px' }}>{row.open}</td>
+                                  <td style={{ padding: '8px 6px' }}>{row.high}</td>
+                                  <td style={{ padding: '8px 6px' }}>{row.low}</td>
+                                  <td style={{ padding: '8px 6px' }}>{row.close}</td>
+                                  <td style={{ padding: '8px 6px' }}>{row.volume}</td>
+                                  <td style={{ padding: '8px 6px' }}>
+                                    {row.indicators && typeof row.indicators.bullish_score === 'number'
+                                      ? (row.indicators.bullish_score * 100).toFixed(2)
+                                      : 'N/A'}
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+
+                        {/* Indicators Chart Section */}
+                        <section style={{ marginTop: 16, padding: '1rem', background: 'linear-gradient(145deg,#0f1317,#0c0f12)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.03)' }}>
+                          <h3 style={{ marginBottom: 12 }}>Relational Indicators</h3>
+                          <div style={{ height: 320 }}>
+                            <IndicatorsChart ticker={ticker} />
+                          </div>
+                        </section>
+                      </>
                     );
                   }}
                 </TickerIndicatorsList>
               )}
             </TickerHistoryList>
           </div>
+
+          {/* Bullish Score Overview Section */}
+          <BullishScoreOverview ticker={ticker} />
         </div>
       </div>
     </div>

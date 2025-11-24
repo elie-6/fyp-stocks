@@ -48,7 +48,7 @@ export default function AllTickersPage() {
                   {/* MIDDLE — close & volume (right-aligned) */}
                   <div className="ticker-card-middle">
                     <p className="ticker-close">Close: ${lastClose.toFixed(2)}</p>
-                    <p className="ticker-vol">Vol: {lastVolume.toLocaleString()}</p>
+                    <p className="ticker-vol">Volume: {lastVolume.toLocaleString()}</p>
                   </div>
 
                   {/* RIGHT — sparkline */}
