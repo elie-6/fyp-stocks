@@ -1,4 +1,4 @@
-// src/components/IndicatorsChart.jsx
+
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import TickerIndicatorsList from './TickerIndicatorsList';
@@ -50,7 +50,7 @@ export default function IndicatorsChart({ ticker }) {
                 <Line
                   key={ind.key}
                   dataKey={ind.key}
-                  name={ind.label} // clean label in legend
+                  name={ind.label} // clean label
                   stroke={ind.color}
                   strokeWidth={2}
                   dot={false}

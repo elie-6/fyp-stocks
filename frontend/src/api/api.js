@@ -6,14 +6,14 @@ export async function fetchTodayBullish() {
   return await res.json();
 }
 
-// New: fetch full OHLCV history for a ticker
+//  fetch full OHLCV history for a ticker
 export async function fetchTickerHistory(ticker) {
   const res = await fetch(`${API_BASE}/ticker_history/${ticker}`);
   if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
   return await res.json();
 }
 
-// New function for fetching full indicator parquet
+// fetch full indicator parquet
 export async function fetchTickerIndicators(ticker) {
   const res = await fetch(`${API_BASE}/ticker_indicators/${ticker}`);
   if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);

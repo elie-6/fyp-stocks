@@ -81,7 +81,6 @@ def calculate_indicators_and_score(df: pd.DataFrame) -> pd.DataFrame:
         w_ATR * df['ATR_pct_norm']
     )
     
-    # Keep only the **indicator + score columns + timestamp**
     cols_to_keep = [
         'date','timestamp', 'ROC_10_norm', 'EMA50_dist_norm',
         'Volume_ratio_norm', 'RSI14_norm', 'New_high50',
@@ -90,7 +89,7 @@ def calculate_indicators_and_score(df: pd.DataFrame) -> pd.DataFrame:
     df_clean = df[cols_to_keep].copy()
     return df_clean
 
-# ---------- Process all tickers incrementally ----------
+# ---------- Processing all tickers incrementally ----------
 
 def compute_all_tickers():
     tickers_last_rows = []

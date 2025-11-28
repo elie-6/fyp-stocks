@@ -1,4 +1,4 @@
-// src/components/TickerIndicatorsList.jsx
+
 import { useState, useEffect } from 'react';
 import { fetchTickerIndicators } from '../api/api';
 
@@ -23,6 +23,6 @@ export default function TickerIndicatorsList({ ticker, children }) {
       });
   }, [ticker]);
 
-  // Render-prop: return children({ data, loading, error })
+  // Render-prop
   return typeof children === 'function' ? children({ data, loading, error }) : null;
 }

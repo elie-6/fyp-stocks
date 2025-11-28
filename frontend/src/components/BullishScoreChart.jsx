@@ -1,4 +1,4 @@
-// src/components/BullishScoreChart.jsx
+
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import TickerIndicatorsList from './TickerIndicatorsList';

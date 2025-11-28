@@ -1,14 +1,14 @@
-// src/pages/TickerPage.jsx
+
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
 import TickerHistoryList from '../components/TickerHistoryList';
 import TickerIndicatorsList from '../components/TickerIndicatorsList';
-import TradingViewWidget from '../components/TradingViewWidget'; // <-- import widget
+import TradingViewWidget from '../components/TradingViewWidget'; 
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 import IndicatorsChart from '../components/IndicatorsChart';
-import BullishScoreOverview from '../components/BullishScoreOverview'; // new
+import BullishScoreOverview from '../components/BullishScoreOverview'; 
 
 export default function TickerPage() {
   const { ticker } = useParams();
@@ -37,8 +37,9 @@ export default function TickerPage() {
 
               const keys = [
                 { key: 'RSI14_norm', label: 'RSI14' },
-                { key: 'EMA50_dist_norm', label: 'EMA50 dist' },
+                { key: 'EMA50_dist_norm', label: 'EMA50' },
                 { key: 'ROC_10_norm', label: 'ROC(10)' },
+                { key: 'Volume_ratio_norm', label: 'Volume Ratio' },
                 { key: 'ATR_pct_norm', label: 'ATR %' },
                 { key: 'bullish_score', label: 'Bullish Score' },
               ];

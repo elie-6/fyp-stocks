@@ -7,7 +7,7 @@ export default function TradingViewWidget({ symbol }) {
     const container = containerRef.current;
     if (!container) return;
 
-    // clear previous widget if any
+    // clear previous widget 
     container.innerHTML = '';
 
     // create the TradingView script
@@ -25,8 +25,8 @@ export default function TradingViewWidget({ symbol }) {
         theme: 'dark',
         style: '1',           // candlestick
         locale: 'en',
-        width: '100%',        // fill container width
-        height: '100%',       // fill container height
+        width: '100%',       
+        height: '100%',       
         allow_symbol_change: true,
         hide_side_toolbar: false,
         show_popup_button: true,
@@ -36,12 +36,12 @@ export default function TradingViewWidget({ symbol }) {
     container.appendChild(script);
 
     return () => {
-      // cleanup: remove all children on unmount
+      // cleanup
       if (container) container.innerHTML = '';
     };
   }, [symbol]);
 
-  // parent container must have a fixed height for the chart to render fully
+  
   return (
     <div
       ref={containerRef}

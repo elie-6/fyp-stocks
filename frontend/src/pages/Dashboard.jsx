@@ -17,7 +17,7 @@ export default function Dashboard() {
       {/* Section title */}
       <div className="section-title">Today Bullish Prediction</div>
 
-      {/* Use your existing TodayBullishList.jsx as a render-prop */}
+      
       <TodayBullishList>
         {({ data, loading, error }) => {
           if (loading) return <p>Loading bullish data...</p>;

@@ -5,8 +5,8 @@ import TickerIndicatorsList from './TickerIndicatorsList';
 import './HeroSection.css';
 
 export default function HeroSection({ ticker }) {
-  // This component uses your render-prop children internally and
-  // renders a compact hero with latest price + bullish score + small sparkline.
+  // This component uses render-prop children internally
+  // renders latest price + bullish score + small sparkline.
   return (
     <div className="hero-wrapper">
       <TickerHistoryList ticker={ticker}>
@@ -53,13 +53,13 @@ export default function HeroSection({ ticker }) {
               const latestClose = Number(latest.close ?? 0);
               const closes = history.slice(-60).map((r) => Number(r.close ?? 0));
 
-              // Bullish score from indicators (last row), scale 0-100 if exists
+              // Bullish score from indicators (last row), scale 0-100 
               const latestIndicator = indicators[indicators.length - 1] ?? {};
               const rawScore = latestIndicator.bullish_score;
               const scorePercent =
                 typeof rawScore === 'number' ? (rawScore * 100).toFixed(2) : 'N/A';
 
-              // Optional small percent change vs 7 days ago (if available)
+              // small percent change vs 7 days ago 
               let pct7 = null;
               if (closes.length > 7) {
                 const last = closes[closes.length - 1];
@@ -68,7 +68,7 @@ export default function HeroSection({ ticker }) {
               }
 
               // determine sparkline color using last vs 7 periods ago
-              let lineColor = '#9CA3AF'; // fallback gray-ish
+              let lineColor = '#9CA3AF'; 
               if (closes.length >= 8) {
                 const last = closes[closes.length - 1];
                 const last7 = closes[closes.length - 8];

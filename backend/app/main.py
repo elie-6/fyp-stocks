@@ -3,19 +3,19 @@ from fastapi import FastAPI,HTTPException
 import pandas as pd
 from fastapi.middleware.cors import CORSMiddleware
 import os
-from app.routes import stocks  # your existing router
+from app.routes import stocks  
 import numpy as np
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
 TODAY_FILE = os.path.join(BASE_DIR, "today_bullish_scores", "parquet", "today_bullish_scores.parquet")
-TICKER_DATA_DIR = os.path.join(BASE_DIR, "data", "parquet")  # folder containing {ticker}.parquet
-TICKER_INDICATORS_DIR = os.path.join(BASE_DIR, "indicators", "parquet")  # folder containing {ticker}.parquet
+TICKER_DATA_DIR = os.path.join(BASE_DIR, "data", "parquet")  
+TICKER_INDICATORS_DIR = os.path.join(BASE_DIR, "indicators", "parquet")  
 
 
 
 app = FastAPI(title="Stock Search API")
 
-# Include your existing stocks router
+
 app.include_router(stocks.router, prefix="/stocks", tags=["stocks"])
 
 # CORS for Vite frontend dev server
@@ -62,13 +62,13 @@ def df_to_json_records_safe(df):
     return records
 
 
-# ---------- New endpoint for today bullish scores ----------
+# ---------- Endpoints
 
 
 @app.get("/api/today_bullish")
 def get_today_bullish():
 
-     # Debug: check path
+     # Debug
     print("Looking for:", TODAY_FILE)
     print("Exists?", os.path.exists(TODAY_FILE))
     
@@ -83,7 +83,7 @@ def get_today_bullish():
 def get_ticker_history(ticker: str):
     file_path = os.path.join(TICKER_DATA_DIR, f"{ticker}.parquet")
     
-    # Debug prints
+    # Debug 
     print("Looking for ticker file:", file_path)
     print("Exists?", os.path.exists(file_path))
     
@@ -100,10 +100,10 @@ def get_ticker_history(ticker: str):
     
 @app.get("/api/ticker_indicators/{ticker}")
 def get_ticker_indicators(ticker: str):
-    # Construct the path to the ticker's indicators parquet
+    # Constructs the path to the ticker's indicators parquet
     file_path = os.path.join(TICKER_INDICATORS_DIR, f"{ticker}.parquet")
 
-    # Debug prints
+    # Debug 
     print("Looking for indicators file:", file_path)
     print("Exists?", os.path.exists(file_path))
 
@@ -111,7 +111,6 @@ def get_ticker_indicators(ticker: str):
         raise HTTPException(status_code=404, detail="Ticker indicators not found")
 
     try:
-        # Read the parquet file
         df = pd.read_parquet(file_path).sort_values("timestamp")
         df['timestamp'] = df['timestamp'].astype(str)
         return df_to_json_records_safe(df)

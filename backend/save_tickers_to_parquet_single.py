@@ -1,14 +1,6 @@
 #!/usr/bin/env python3
 """
 Save multiple tickers into single parquet files (one file per ticker).
-Includes a one-liner daily update function for scheduler/cron.
-
-Usage (manual run):
-    cd backend
-    python save_tickers_to_parquet_single.py
-
-Example cron call later:
-    python -c "from save_tickers_to_parquet_single import daily_update_tickers; daily_update_tickers()"
 """
 import os
 import tempfile
@@ -21,7 +13,7 @@ import yfinance as yf
 
 # ---------- Config ----------
 PARQUET_ROOT = os.environ.get("PARQUET_ROOT", "data/parquet")
-TICKERS = ['AAPL', 'AMZN', 'GOOG', 'MSFT', 'TSLA', 'NVDA', 'PLTR', 'ORCL', 'NFLX','META']   # change as needed
+TICKERS = ['AAPL', 'AMZN', 'GOOG', 'MSFT', 'TSLA', 'NVDA', 'PLTR', 'ORCL', 'NFLX','META']  
 INTERVAL = "1d"                      # '1d', '1h', '1m'
 AUTO_ADJUST = True                   # yfinance auto_adjust
 PYARROW_ENGINE = "pyarrow"
@@ -35,14 +27,13 @@ def _ensure_dir(path: str):
 def _atomic_parquet_write(df: pd.DataFrame, path: str):
     """
     Write DataFrame to `path` atomically: write to temp file then move.
-    This reduces the risk of a partially-written/corrupt parquet file.
+    
     """
     _ensure_dir(os.path.dirname(path) or ".")
     tmpdir = tempfile.mkdtemp(dir=os.path.dirname(path) or ".")
     try:
         tmpfile = os.path.join(tmpdir, "tmp.parquet")
         df.to_parquet(tmpfile, engine=PYARROW_ENGINE, index=False, compression=SNAPPY_COMPRESSION)
-        # move is atomic on most OSes (rename)
         shutil.move(tmpfile, path)
     finally:
         shutil.rmtree(tmpdir, ignore_errors=True)
@@ -65,7 +56,6 @@ def _flatten_and_normalize(df: pd.DataFrame, ticker: str) -> pd.DataFrame:
     """
     Normalize the DataFrame:
       - ensure canonical columns: ticker, timestamp, open, high, low, close, adj_close, volume
-      - timezone-naive timestamps
     """
     if df is None or df.empty:
         return pd.DataFrame()
@@ -125,7 +115,6 @@ def save_ticker_incremental(ticker: str, lookback_days: int = LOOKBACK_DAYS_IF_N
       - If file exists: fetch data starting from (last saved date + 1 day).
       - If file doesn't exist: fetch last `lookback_days` days.
       - Normalize, dedupe by timestamp, sort, and write atomically.
-    Prints minimal status lines.
     """
     _ensure_dir(PARQUET_ROOT)
     path = os.path.join(PARQUET_ROOT, f"{ticker.upper()}.parquet")
@@ -195,17 +184,17 @@ def save_ticker_incremental(ticker: str, lookback_days: int = LOOKBACK_DAYS_IF_N
 
     print(f"{ticker}: added {new_rows_count} new rows (total {len(combined)})")
 
-# ---------- One-liner daily update you liked ----------
+# ---------- One-liner daily update  ----------
 def daily_update_tickers(tickers: List[str] = TICKERS):
     """
     One-line-style daily updater: calls the incremental updater for each ticker.
 
-    Safe to call from cron or scheduler.
+    can be called from cron or scheduler.
     """
     for ticker in tickers:
         save_ticker_incremental(ticker)
 
-# ---------- Main: run daily update when script executed directly ----------
+# ---------- Main: run daily update  ----------
 if __name__ == "__main__":
     print("Starting incremental update for tickers...")
     daily_update_tickers()
