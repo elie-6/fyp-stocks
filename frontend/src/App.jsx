@@ -4,6 +4,7 @@ import TickerPage from './pages/TickerPage';
 import AllTickersPage from './pages/AllTickersPage'; 
 import ContactUs from './pages/ContactUs'; 
 import About from './pages/About';
+import AuthPage from "./pages/AuthPage";
 
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/all-tickers" element={<AllTickersPage />} />
         <Route path="/contact" element={<ContactUs />} /> 
         <Route path="/about" element={<About />} /> 
+        <Route path="/auth" element={<AuthPage />} /> 
       </Routes>
     </Router>
   );

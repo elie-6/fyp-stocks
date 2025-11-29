@@ -1,0 +1,147 @@
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+  }
+  
+  .auth-container {
+    background-color: #121922; /* consistent with header */
+    padding: 2.5rem 3rem;       /* slightly bigger container */
+    border-radius: 12px;
+    border: 1px solid #2a4d8f;
+    box-shadow: 0 4px 15px rgba(42, 77, 143, 0.25);
+    width: 100%;
+    max-width: 440px;          /* a bit wider so elements breathe */
+    color: var(--text);
+    box-sizing: border-box;
+  }
+  
+  .auth-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--section-title);
+  }
+  
+  .auth-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;              /* slightly larger gap between controls */
+  }
+  
+  /* keep label styles minimal (floating label handled below) */
+  .auth-container label {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  
+  /* inputs: slightly bigger and consistent box-sizing so padding doesn't affect width */
+  .auth-container input,
+  .input-group input {
+    padding: 0.85rem 1rem;     /* larger touch area */
+    border-radius: var(--radius-sm);
+    border: 1px solid #2a4d8f;
+    background-color: #0d1117;
+    color: var(--text);
+    font-size: 1.02rem;        /* slightly larger text */
+    width: 100%;
+    box-sizing: border-box;    /* important for consistent width */
+    outline: none;
+  }
+  
+  /* focus state unchanged but kept consistent */
+  .auth-container input:focus,
+  .input-group input:focus {
+    border-color: var(--link-hover);
+    box-shadow: 0 0 5px var(--link-hover);
+  }
+  
+  /* submit button now fills the same width as inputs */
+  .auth-container button {
+    padding: 0.95rem;
+    background-color: #2a4d8f;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 0.2s ease;
+    display: block;
+    width: 100%;               /* full width to match inputs */
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  .auth-container button:hover {
+    background-color: #3b5fd9;
+  }
+  
+  /* error + toggle */
+  .auth-error {
+    color: #f87171; /* red for error */
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-align: center;
+    margin-top: 0.25rem;
+  }
+  
+  .auth-toggle {
+    text-align: center;
+    margin-top: 0.6rem;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+  
+  .auth-toggle span {
+    color: var(--link-hover);
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  /* === Floating / filled label support (adjusted positions) === */
+  
+  .input-group {
+    position: relative;
+    margin-top: 0.6rem;
+  }
+  
+  .input-group input {
+    /* uses the shared input rules above; keep transition */
+    transition: border 0.15s ease, box-shadow 0.15s ease;
+  }
+  
+  .input-group label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;                /* push label slightly inward from left */
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: all 0.15s ease;
+    background: transparent;
+    padding: 0 0.2rem;
+  }
+  
+  /* when input has value or focused, lift label */
+  .input-group.filled label,
+  .input-group input:focus + label {
+    top: -0.6rem;
+    left: 0.85rem;             /* slight left shift when floated */
+    font-size: 0.78rem;
+    color: var(--link-hover);
+    background-color: #121922; /* match container */
+  }
+  
+  /* small padding tweak so label never collides with border */
+  .input-group.filled label {
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+  }
+  
+  /* disabled button style */
+  .auth-container button[disabled] {
+    opacity: 0.85;
+    cursor: not-allowed;
+  }
+  

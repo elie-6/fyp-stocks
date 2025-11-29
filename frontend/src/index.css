@@ -79,6 +79,24 @@ header nav a:hover {
   color: var(--link-hover);
 }
 
+header nav .header-link {
+  margin-left: 1.5rem;   /* same spacing as anchors */
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0;            /* look like a link, not a button */
+  line-height: 1;        /* ensure vertical alignment */
+}
+
+/* Hover effect same as anchor hover */
+header nav .header-link:hover {
+  color: var(--link-hover);
+}
+
 /* alltickerspage.css */
 .all-tickers-page {
   padding: 2rem;
