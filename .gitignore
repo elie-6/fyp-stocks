@@ -5,3 +5,4 @@
 data/
 indicators/
 today_bullish_scores/
+backend/.env

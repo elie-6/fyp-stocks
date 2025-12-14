@@ -75,3 +75,54 @@ export function authFetch(url, options = {}) {
     },
   });
 }
+
+// --- Wallet / Trading functions ---
+export async function getWalletValue() {
+  const res = await authFetch(`http://127.0.0.1:8000/wallet/value`);
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.detail || "Failed to fetch wallet value");
+  }
+  return await res.json();
+}
+
+export async function buyTicker(ticker, quantity) {
+  const res = await authFetch(`http://127.0.0.1:8000/wallet/buy`, {
+    method: "POST",
+    body: JSON.stringify({ ticker, quantity: quantity.toString() }),
+  });
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.detail || "Buy failed");
+  }
+  return await res.json();
+}
+
+export async function sellTicker(ticker, quantity) {
+  const res = await authFetch(`http://127.0.0.1:8000/wallet/sell`, {
+    method: "POST",
+    body: JSON.stringify({ ticker, quantity: quantity.toString() }),
+  });
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.detail || "Sell failed");
+  }
+  return await res.json();
+}
+
+export async function fetchLivePrice(ticker) {
+  const res = await authFetch(`http://127.0.0.1:8000/wallet/live_price/${ticker}`);
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.detail || "Failed to fetch live price");
+  }
+  return await res.json(); // returns { ticker, price }
+}
+
+// Fetch all tickers dynamically from backend
+export async function fetchAllTickers() {
+  const res = await fetch(`${API_BASE}/tickers/`);
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+  const data = await res.json();
+  return data.tickers; // returns ["AAPL", "AMZN", "GOOG", ...]
+}

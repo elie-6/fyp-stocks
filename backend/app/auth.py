@@ -80,6 +80,17 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
             raise credentials_exception
         return user
 
+
+# -------------------------
+# Helper to get user ID directly
+# -------------------------
+def get_current_user_id(current_user: User = Depends(get_current_user)) -> int:
+    """
+    FastAPI dependency to return only the user ID from the current token.
+    Can be used in routes that only need user_id, e.g., wallet endpoints.
+    """
+    return current_user.id
+
 # -------------------------
 # Routes
 # -------------------------

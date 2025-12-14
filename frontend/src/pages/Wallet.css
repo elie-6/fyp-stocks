@@ -1,0 +1,247 @@
+/* src/pages/Wallet.css */
+
+/* use site variables defined in index.css */
+.wallet-page {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    color: var(--text);
+  }
+  
+  /* Left side: ticker list */
+  .wallet-left {
+    width: 28%;
+    background-color: #131824; /* slightly lighter than header-bg */
+    padding: 18px;
+    border-radius: 12px;
+    max-height: 82vh;
+    overflow-y: auto;
+    border: 1px solid #202B38;
+    box-shadow: 0 6px 18px rgba(3,6,12,0.6);
+  }
+  
+  /* bigger, more pronounced section headers */
+  .section-title {
+    font-size: 1.6rem;      /* increased */
+    margin-bottom: 12px;
+    font-weight: 800;       /* stronger weight */
+    color: var(--section-title);
+    letter-spacing: 0.4px;
+  }
+  
+  /* ticker list */
+  .ticker-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  /* card style aligned with site (dark) */
+  .ticker-card {
+    padding: 10px 12px;
+    background-color: #1E2633; /* same background used in other ticker cards */
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid #2C3E50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.45);
+  }
+  
+  .ticker-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.6);
+  }
+  
+  .ticker-card.selected {
+    border: 1.5px solid var(--link-hover);
+    box-shadow: 0 10px 30px rgba(59,130,246,0.08);
+    background: linear-gradient(180deg, rgba(29,39,60,0.9), #1B2430);
+  }
+  
+  .ticker-name {
+    font-weight: 700;
+    color: #FFFFFF;
+    font-size: 1.05rem;
+  }
+  
+  .ticker-change.positive {
+    color: #4CAF50;
+    font-weight: 700;
+  }
+  
+  .ticker-change.negative {
+    color: #F44336;
+    font-weight: 700;
+  }
+  
+  /* Right side: wallet info */
+  .wallet-right {
+    flex: 1;
+    background-color: #131824;
+    padding: 18px;
+    border-radius: 12px;
+    max-height: 82vh;
+    overflow-y: auto;
+    border: 1px solid #202B38;
+    box-shadow: 0 6px 18px rgba(3,6,12,0.6);
+  }
+  
+  /* balances section */
+  .wallet-balances {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text);
+  }
+
+  /* make balance rows look a bit nicer */
+  .wallet-balances > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .wallet-balances > div:first-child {
+    font-size: 1.25rem;
+    color: #ffffff;
+    font-weight: 800;
+  }
+  .wallet-balances > div:last-child {
+    font-size: 1.05rem;
+    color: #9aa6b2;
+    font-weight: 700;
+  }
+  
+  /* actions */
+  .wallet-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  
+  .wallet-actions label {
+    font-weight: 700;
+    margin-bottom: 4px;
+    display: block;
+    color: var(--text);
+  }
+  
+  /* inputs / values */
+  .wallet-actions input[type="number"] {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #263746;
+    background-color: #0D1117; /* site bg */
+    color: var(--text);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* action buttons */
+  .action-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 6px;
+  }
+  
+  .buy-btn, .sell-btn {
+    flex: 1;
+    padding: 10px 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  
+  /* green buy — tuned for dark bg */
+  .buy-btn {
+    background: linear-gradient(180deg, #2EA44F, #1B8A3E);
+    color: white;
+    box-shadow: 0 8px 18px rgba(46,164,79,0.12);
+  }
+  
+  .buy-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(46,164,79,0.18);
+  }
+  
+  /* red sell — tuned for dark bg */
+  .sell-btn {
+    background: linear-gradient(180deg, #F45B69, #D13A46);
+    color: white;
+    box-shadow: 0 8px 18px rgba(244,91,105,0.12);
+  }
+  
+  .sell-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(244,91,105,0.18);
+  }
+  
+  /* holdings - add divider and spacing to make it feel like a section */
+  .wallet-holdings {
+    margin-top: 18px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.04); /* subtle divider */
+  }
+
+  .wallet-holdings h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.05rem;
+    color: var(--section-title);
+    font-weight: 800;
+  }
+  
+  .holding-card {
+    background-color: #1E2633;
+    padding: 10px 12px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    border: 1px solid #2C3E50;
+    color: var(--text);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.45);
+  }
+  
+  /* error box */
+  .error {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: rgba(244,67,54,0.08);
+    color: #ffb4b4;
+    border-radius: 8px;
+    border: 1px solid rgba(244,67,54,0.12);
+    font-weight: 700;
+  }
+
+  /* dark scrollbars for left + right panels so white doesn't show */
+  .wallet-left::-webkit-scrollbar,
+  .wallet-right::-webkit-scrollbar {
+    width: 10px;
+  }
+  .wallet-left::-webkit-scrollbar-track,
+  .wallet-right::-webkit-scrollbar-track {
+    background: #0E1419;
+  }
+  .wallet-left::-webkit-scrollbar-thumb,
+  .wallet-right::-webkit-scrollbar-thumb {
+    background: #222d34;
+    border-radius: 8px;
+    border: 2px solid #0E1419;
+  }
+
+  /* firefox */
+  .wallet-left,
+  .wallet-right {
+    scrollbar-width: thin;
+    scrollbar-color: #222d34 #0E1419;
+  }

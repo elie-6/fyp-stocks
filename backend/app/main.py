@@ -6,6 +6,8 @@ import os
 from app.routes import stocks  
 import numpy as np
 from app.auth import router as auth_router
+from app.wallet import router as wallet_router
+from app.tickers import router as tickers_router
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
 TODAY_FILE = os.path.join(BASE_DIR, "today_bullish_scores", "parquet", "today_bullish_scores.parquet")
@@ -19,6 +21,8 @@ app = FastAPI(title="Stock Search API")
 
 app.include_router(stocks.router, prefix="/stocks", tags=["stocks"])
 app.include_router(auth_router) 
+app.include_router(wallet_router)
+app.include_router(tickers_router , prefix="/api")
 
 # CORS for Vite frontend dev server
 app.add_middleware(

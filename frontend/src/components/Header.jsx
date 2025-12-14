@@ -27,8 +27,10 @@ export default function Header() {
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
 
+        {/* Wallet route always visible */}
+        <a href="/wallet" className="header-link">Wallet</a>
+
         {loggedIn ? (
-          /* use the same visual class as links so it lines up perfectly */
           <button
             type="button"
             className="header-link"
