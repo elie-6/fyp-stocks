@@ -2,6 +2,8 @@
 
 A stock analysis platform built for educational trading, emphasizing data quality, transparent analytics, and clean architecture.
 
+## Go to branch FYP-v1.0 for final version (main branch is just an older push)
+
 ## 🎯 Overview
 
 FYP-Stocks is a full-stack web application that fetches historical stock data from Yahoo Finance, validates and cleans it, computes technical indicators, and presents an explainable bullish score through an interactive dashboard. Users can simulate trading with a virtual wallet to practice without financial risk.
