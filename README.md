@@ -254,8 +254,7 @@ fyp-stocks/
 ## 👨‍💻 Author
 
 **Elie Abi Safi**  
-Computer Science 
-
+Computer Science  
 [GitHub](https://github.com/elie-6) 
 
 ---
