@@ -1,6 +1,6 @@
 # FYP-Stocks
 
-### A stock analysis platform built for educational trading, emphasizing data quality, transparent analytics, and clean architecture.
+#### A stock analysis platform built for educational trading, emphasizing data quality, transparent analytics, and clean architecture.
 
 ## Go to branch FYP-v1.0 for final version (main branch is just an older push)
 
