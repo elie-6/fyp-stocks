@@ -79,7 +79,7 @@ EOF
 # Initialize database
 python -c "from app.database import create_db_and_tables; create_db_and_tables()"
 
-# Fetch initial data (takes ~2 minutes for 10 tickers)
+# Fetch initial data (takes ~1 minutes for 10 tickers)
 python save_tickers_to_parquet_single.py
 python compute_bullish.py
 
@@ -168,12 +168,6 @@ w_ROC, w_EMA, w_Vol, w_RSI, w_High, w_ATR = 0.3, 0.25, 0.15, 0.1, 0.2, 0.1
 ---
 
 ## 🧪 Testing
-
-### Backend Tests
-```bash
-cd backend
-pytest tests/
-```
 
 ### Manual Testing Checklist
 - [ ] Signup/Login flow works
